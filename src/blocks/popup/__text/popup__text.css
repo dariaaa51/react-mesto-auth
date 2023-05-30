@@ -1,0 +1,27 @@
+.popup__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  /* margin: 0 0 26px; */
+  max-width: 358px;
+  width: 100%;
+  box-sizing: border-box;
+  /* padding: 0 0 10px 0; */
+  padding: 5px 0 0;
+  margin-bottom: 0;
+  margin-top: px;
+}
+
+.popup__text:last-of-type {
+  margin-bottom: 0;
+}
+
+@media (max-width: 535px) {
+  .popup__text {
+    padding-bottom: 8px;
+    max-width: 238px;
+  }
+}

@@ -1,0 +1,8 @@
+.element__picture {
+  width: 282px;
+  height: 282px;
+  grid-area: pic;
+  cursor: pointer;
+  object-fit: cover;
+  object-position: center;
+}
