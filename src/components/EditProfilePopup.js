@@ -1,30 +1,30 @@
-import React from "react";
+import { useContext, useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function EditFrofilePopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
+const EditFrofilePopup = ({ isOpen, onUpdateUser, onClose }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser, props.isOpen]);
+  }, [currentUser, isOpen]);
 
-  function handleSumbit(evt) {
+  const handleSumbit = (evt) => {
     evt.preventDefault();
-    props.onUpdateUser({
+    onUpdateUser({
       name,
       about: description,
     });
   }
 
-  function handleChangeName(evt) {
+  const handleChangeName = (evt) => {
     setName(evt.target.value);
   }
 
-  function handleChangeAbout(evt) {
+  const handleChangeAbout = (evt) => {
     setDescription(evt.target.value);
   }
 
@@ -32,8 +32,8 @@ function EditFrofilePopup(props) {
     <PopupWithForm
       name="edit-profle"
       title="Редактировать профиль"
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       buttonText="Сохранить"
       onSubmit={handleSumbit}
     >

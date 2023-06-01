@@ -3,7 +3,8 @@
   height: 33px;
   background-image: url("../../../images/logo.svg");
   background-repeat: no-repeat;
-
+  background-size: 142px 33px;
+  /* object-fit: cover; */
 }
 
 @media screen and (max-width: 430px) {

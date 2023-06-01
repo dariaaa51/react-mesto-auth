@@ -57,3 +57,123 @@
 @import url(./blocks/profile/__avatar-area/profile__avatar-area.css);
 
 
+.authorization-form__button {
+    width: 100%;
+    height: 50px;
+    margin: 186px 0 15px;
+    color: black;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .authorization-form__button:hover {
+    background: #ffffff;
+    opacity: 0.85;
+  }
+
+  .authorization-form__input {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    background-color: black;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 13px;
+    margin-bottom: 30px;
+    outline: none;
+  }
+
+  .authorization-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .authorization-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .authorization {
+    max-width: 358px;
+    margin: 0 auto;
+  }
+  .authorization h1 {
+    padding: 60px 0 50px;
+    margin: 0;
+    font-family: "Inter";
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
+
+  .header__button {
+    width: 100%;
+    background-color: transparent;
+    color: #a9a9a9;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-family: "Inter";
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    transition: 0.2s;
+  }
+  
+  .header__button {
+    opacity: 0.6;
+  }
+
+  .header__link {
+    text-decoration: none;
+    color: #fff;
+    font-family: "Inter";
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    transition: 0.2s;
+  }
+  
+  .header__link:hover {
+    opacity: 0.6;
+  }
+
+  .header__user-email {
+    margin: 0;
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    white-space: nowrap;
+    text-align: right;
+    color: #ffffff;
+  }
+
+  .header__user-info {
+    display: flex;
+    gap: 24px;
+  }
+
+  .popup__auth-image {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 26px auto 32px;
+  }
+
+  .popup__title_auth {
+    text-align: center;
+    margin-bottom: 23px;
+  }
