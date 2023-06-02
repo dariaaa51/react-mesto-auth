@@ -1,10 +1,8 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
-
 const getJson = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
-export const register = (password, email) => {
+export const registration = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
@@ -14,7 +12,7 @@ export const register = (password, email) => {
   }).then(getJson);
 };
 
-export const authorize = (password, email) => {
+export const authorization = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
@@ -38,3 +36,6 @@ export const getContent = (token) => {
     },
   }).then(getJson);
 };
+
+export const BASE_URL = "https://auth.nomoreparties.co";
+

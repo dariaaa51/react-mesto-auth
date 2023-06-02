@@ -2,32 +2,32 @@ import React from "react";
 
 const Login = ({ title, formValue, handleChange, onLogin, buttonText }) => {
   return (
-    <div className="authorization">
+    <div className="login">
       <h1>{title}</h1>
-      <form className="authorization-form" onSubmit={onLogin}>
+      <form className="login__form" onSubmit={onLogin}>
         <input
-          className="authorization-form__input"
+          className="login__form-input"
           name="email"
           value={formValue.email}
           onChange={handleChange}
           placeholder="E-mail"
+          minLength="2"
+          maxLength="40"
           type="email"
           required
         ></input>
         <input
+          className="login__form-input"
           name="password"
-          className="authorization-form__input"
+          minLength="2"
+          maxLength="40"
           value={formValue.password}
           onChange={handleChange}
           placeholder="Пароль"
           type="password"
           required
         ></input>
-        <button
-          className="authorization-form__button"
-          type="submit"
-          name="save"
-        >
+        <button className="login__form-button" type="submit">
           {buttonText}
         </button>
       </form>

@@ -1,0 +1,7 @@
+.popup__tool-image {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 26px auto 32px;
+  /* align-items: center; */
+}

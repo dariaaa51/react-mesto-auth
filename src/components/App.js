@@ -15,37 +15,81 @@ import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import { getContent, authorize, register } from "../utils/auth";
+import { getContent, authorization, registration } from "../utilits/auth";
 
 const App = () => {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isOpenInfoTooltip, setIsOpenInfoTooltip] = React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState('');
+  const [email, setEmail] = React.useState("");
+
   const navigate = useNavigate();
 
   const [formValue, setFormValue] = React.useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const [isRegister, setIsRegister] = React.useState({
-    status: '',
-    message: '',
+    status: "",
+    message: "",
   });
+
+  const handleEditProfileClick = () => {
+    setIsEditProfilePopupOpen(true);
+  };
+
+  const handleAddPlaceClick = () => {
+    setIsAddPlacePopupOpen(true);
+  };
+
+  const handleEditAvatarClick = () => {
+    setIsEditAvatarPopupOpen(true);
+  };
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+  };
+
+  const closeAllPopups = () => {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsImagePopupOpen(false);
+    setIsOpenInfoTooltip(false);
+  };
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfo(), api.getCardsApi()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(`Возникла ошибка глобальная ошибка - ${err}`);
+        });
+    }
+  }, [isLoggedIn]);
 
   const handleRegister = (evt) => {
     evt.preventDefault();
     const { password, email } = formValue;
-    register(password, email)
+    registration(password, email)
       .then(() => {
-        setFormValue({ email: '', password: '' });
+        setFormValue({ email: "", password: "" });
         setIsOpenInfoTooltip(true);
         setIsRegister({
           status: true,
@@ -66,7 +110,7 @@ const App = () => {
   const handleLogin = (evt) => {
     evt.preventDefault();
     const { password, email } = formValue;
-    authorize(password, email)
+    authorization(password, email)
       .then((data) => {
         setFormValue({ email: "", password: "" });
         setIsLoggedIn(true);
@@ -93,10 +137,6 @@ const App = () => {
     });
   };
 
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -107,46 +147,9 @@ const App = () => {
           navigate("/", { replace: true });
         })
         .catch((err) => {
-          console.log(`Возникла ошибка с проверкой токена на сервере - ${err}`);
+          console.log(`Возникла ошибка токеном на сервере - ${err}`);
         });
     }
-  };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getCardsApi()])
-        .then(([user, cards]) => {
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(`Возникла ошибка глобальная ошибка - ${err}`);
-        });
-    }
-  }, [isLoggedIn]);
-
-  const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(true);
-  };
-
-  const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(true);
-  };
-
-  const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(true);
-  };
-
-  const handleCardClick = (card) => {
-    setSelectedCard(card);
-  };
-
-  const closeAllPopups = () => {
-    setIsEditProfilePopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setIsImagePopupOpen(false);
-    setIsOpenInfoTooltip(false);
   };
 
   const handleUpdateUser = (items) => {
@@ -157,7 +160,9 @@ const App = () => {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(`Возникла ошибка с обновлением информации пользователя - ${err}`);
+        console.log(
+          `Возникла ошибка с обновлением информации пользователя - ${err}`
+        );
       });
   };
 
@@ -169,7 +174,9 @@ const App = () => {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(`Возникла ошибка с обновлением аватара на сервере - ${err}`);
+        console.log(
+          `Возникла ошибка с обновлением аватара на сервере - ${err}`
+        );
       });
   };
 
@@ -256,7 +263,7 @@ const App = () => {
                 handleChange={handleChange}
                 onRegister={handleRegister}
                 title="Регистрация"
-                buttonText="Зарегиситрироватья"
+                buttonText="Зарегистрироваться"
                 formValue={formValue}
               />
             }
@@ -265,11 +272,11 @@ const App = () => {
             path="/sign-in"
             element={
               <Login
-                title="Вход"
-                buttonText="Войти"
                 onLogin={handleLogin}
                 handleChange={handleChange}
                 formValue={formValue}
+                title="Вход"
+                buttonText="Войти"
               />
             }
           />
@@ -289,7 +296,6 @@ const App = () => {
           isRegister={isRegister}
           isOpen={isOpenInfoTooltip}
           onClose={closeAllPopups}
-          alt={"Статус"}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
@@ -315,35 +321,6 @@ const App = () => {
       </div>
     </CurrentUserContext.Provider>
   );
-
-  //       <Footer />
-  //       <EditProfilePopup
-  //         isOpen={isEditProfilePopupOpen}
-  //         onClose={closeAllPopups}
-  //         onUpdateUser={handleUpdateUser}
-  //       />
-
-  //       <AddPlacePopup
-  //         isOpen={isAddPlacePopupOpen}
-  //         onClose={closeAllPopups}
-  //         onAddPlace={handleAddPlaceSubmit}
-  //       />
-
-  //       <EditAvatarPopup
-  //         isOpen={isEditAvatarPopupOpen}
-  //         onClose={closeAllPopups}
-  //         onUpdateAvatar={handleUpdateAvatar}
-  //       />
-
-  //       <PopupWithForm
-  //         name="delete"
-  //         title="Вы уверены?"
-  //         buttonText="Сохранить"
-  //       />
-  //       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-  //     </div>
-  //   </CurrentUserContext.Provider>
-  // );
 };
 
 export default App;

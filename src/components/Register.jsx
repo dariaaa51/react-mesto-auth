@@ -9,35 +9,35 @@ const Register = ({
   buttonText,
 }) => {
   return (
-    <div className="authorization">
+    <div className="login">
       <h1>{title}</h1>
-      <form className="authorization-form" onSubmit={onRegister}>
+      <form className="login__form" onSubmit={onRegister}>
         <input
-          className="authorization-form__input"
+          className="login__form-input"
           name="email"
           value={formValue.email}
           onChange={handleChange}
           placeholder="E-mail"
           type="email"
+          minLength="2"
+          maxLength="40"
           required
         ></input>
         <input
+          className="login__form-input"
           name="password"
-          className="authorization-form__input"
           value={formValue.password}
           onChange={handleChange}
           placeholder="Пароль"
+          minLength="2"
+          maxLength="40"
           type="password"
           required
         ></input>
-        <button
-          className="authorization-form__button"
-          type="submit"
-          name="save"
-        >
+        <button className="login__form-button" type="submit" name="save">
           {buttonText}
         </button>
-        <Link className="authorization__link" to="/sign-in">
+        <Link className="login__link" to="/sign-in">
           Уже зарегистрированы? Войти
         </Link>
       </form>

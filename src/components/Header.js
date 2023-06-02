@@ -7,11 +7,14 @@ const Header = ({ email, onSignOut }) => {
       <div className="header__logo" alt="Логотип"></div>
       <Routes>
         <Route
-          path="/sign-up"
+          path="/"
           element={
-            <Link className="header__link" to="/sign-in">
-              Войти
-            </Link>
+            <div className="header__menu">
+              <p className="header__email">{email}</p>
+              <button className="header__button" onClick={onSignOut}>
+                Выйти
+              </button>
+            </div>
           }
         />
         <Route
@@ -23,14 +26,11 @@ const Header = ({ email, onSignOut }) => {
           }
         />
         <Route
-          path="/"
+          path="/sign-up"
           element={
-            <div className="header__user-info">
-              <p className="header__user-email">{email}</p>
-              <button className="header__button" onClick={onSignOut}>
-                Выйти
-              </button>
-            </div>
+            <Link className="header__link" to="/sign-in">
+              Войти
+            </Link>
           }
         />
       </Routes>

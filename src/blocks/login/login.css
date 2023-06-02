@@ -1,0 +1,12 @@
+.login {
+    max-width: 358px;
+    margin: 0 auto;
+  }
+  .login h1 {
+    padding: 60px 0 50px;
+    margin: 0;
+    font-family: "Inter";
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }

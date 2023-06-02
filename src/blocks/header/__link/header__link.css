@@ -1,0 +1,13 @@
+.header__link {
+  color: #fff;
+  font-family: "Inter";
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  text-align: right;
+  transition: 0.2s;
+}
+
+.header__link:hover {
+  opacity: 0.6;
+}
