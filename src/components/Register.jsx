@@ -4,14 +4,28 @@ import { Link } from "react-router-dom";
 const Register = ({
   title,
   onRegister,
-  handleChange,
-  formValue,
   buttonText,
 }) => {
+  const [formValue, setFormValue] = React.useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onRegister(formValue);
+  }
   return (
     <div className="login">
       <h1>{title}</h1>
-      <form className="login__form" onSubmit={onRegister}>
+      <form className="login__form" onSubmit={handleSubmit}>
         <input
           className="login__form-input"
           name="email"

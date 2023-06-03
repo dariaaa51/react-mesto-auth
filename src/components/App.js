@@ -33,10 +33,10 @@ const App = () => {
 
   const navigate = useNavigate();
 
-  const [formValue, setFormValue] = React.useState({
-    email: "",
-    password: "",
-  });
+  // const [formValue, setFormValue] = React.useState({
+  //   email: "",
+  //   password: "",
+  // });
 
   const [isRegister, setIsRegister] = React.useState({
     status: "",
@@ -57,6 +57,7 @@ const App = () => {
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
+    setIsImagePopupOpen(true)
   };
 
   const closeAllPopups = () => {
@@ -84,12 +85,12 @@ const App = () => {
     }
   }, [isLoggedIn]);
 
-  const handleRegister = (evt) => {
-    evt.preventDefault();
+  const handleRegister = (formValue) => {
     const { password, email } = formValue;
-    registration(password, email)
+    return registration(password, email)
       .then(() => {
-        setFormValue({ email: "", password: "" });
+        // setFormValue({ email: "", password: "" });
+
         setIsOpenInfoTooltip(true);
         setIsRegister({
           status: true,
@@ -107,12 +108,11 @@ const App = () => {
       });
   };
 
-  const handleLogin = (evt) => {
-    evt.preventDefault();
+  const handleLogin = (formValue) => {
     const { password, email } = formValue;
     authorization(password, email)
       .then((data) => {
-        setFormValue({ email: "", password: "" });
+        // setFormValue({ email: "", password: "" });
         setIsLoggedIn(true);
         setEmail(email);
         navigate("/", { replace: true });
@@ -129,13 +129,6 @@ const App = () => {
     navigate("/sign-in", { replace: true });
   };
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
@@ -260,11 +253,11 @@ const App = () => {
             path="/sign-up"
             element={
               <Register
-                handleChange={handleChange}
+              
                 onRegister={handleRegister}
                 title="Регистрация"
                 buttonText="Зарегистрироваться"
-                formValue={formValue}
+               
               />
             }
           />
@@ -273,8 +266,7 @@ const App = () => {
             element={
               <Login
                 onLogin={handleLogin}
-                handleChange={handleChange}
-                formValue={formValue}
+                
                 title="Вход"
                 buttonText="Войти"
               />
